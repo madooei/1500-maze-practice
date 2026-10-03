@@ -43,47 +43,8 @@ public final class ShortestMazeDistance {
   // or -1 if the exit cannot be reached. Assumes maze is not null,
   // rectangular, and has at least one cell.
   public static int shortestDistance(char[][] maze) {
-    if (!isOpen(maze, 0, 0)) {
-      return -1;
-    }
-
-    int rows = maze.length;
-    int cols = maze[0].length;
-    int[][] distance = new int[rows][cols];
-    for (int row = 0; row < rows; row++) {
-      for (int col = 0; col < cols; col++) {
-        distance[row][col] = -1;
-      }
-    }
-
-    Queue<Position> toExplore = new LinkedQueue<>();
-    toExplore.enqueue(new Position(0, 0));
-    distance[0][0] = 0;
-
-    int[] rowChange = {0, 1, 0, -1};
-    int[] colChange = {1, 0, -1, 0};
-
-    while (!toExplore.isEmpty()) {
-      Position current = toExplore.front();
-      toExplore.dequeue();
-
-      if (current.row == rows - 1 && current.col == cols - 1) {
-        return distance[current.row][current.col];
-      }
-
-      for (int i = 0; i < rowChange.length; i++) {
-        int nextRow = current.row + rowChange[i];
-        int nextCol = current.col + colChange[i];
-        if (isOpen(maze, nextRow, nextCol)
-            && distance[nextRow][nextCol] == -1) {
-          distance[nextRow][nextCol] =
-              distance[current.row][current.col] + 1;
-          toExplore.enqueue(new Position(nextRow, nextCol));
-        }
-      }
-    }
-
-    return -1;
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Returns the cells of a shortest route from the top-left cell to the
@@ -91,57 +52,14 @@ public final class ShortestMazeDistance {
   // exit cannot be reached. Assumes maze is not null, rectangular, and has at
   // least one cell.
   public static List<Position> shortestPath(char[][] maze) {
-    int rows = maze.length;
-    int cols = maze[0].length;
-    if (!isOpen(maze, 0, 0)) {
-      return new ArrayList<>();  // empty: no route
-    }
-
-    Position[][] cameFrom = new Position[rows][cols];
-    boolean[][] visited = new boolean[rows][cols];
-
-    Queue<Position> toExplore = new LinkedQueue<>();
-    toExplore.enqueue(new Position(0, 0));
-    visited[0][0] = true;
-
-    int[] rowChange = {0, 1, 0, -1};
-    int[] colChange = {1, 0, -1, 0};
-
-    while (!toExplore.isEmpty()) {
-      Position current = toExplore.front();
-      toExplore.dequeue();
-
-      if (current.row == rows - 1 && current.col == cols - 1) {
-        return reconstruct(cameFrom, current);
-      }
-
-      for (int i = 0; i < rowChange.length; i++) {
-        int nextRow = current.row + rowChange[i];
-        int nextCol = current.col + colChange[i];
-        if (isOpen(maze, nextRow, nextCol) && !visited[nextRow][nextCol]) {
-          visited[nextRow][nextCol] = true;
-          cameFrom[nextRow][nextCol] = current;  // remember the way back
-          toExplore.enqueue(new Position(nextRow, nextCol));
-        }
-      }
-    }
-
-    return new ArrayList<>();  // empty: the exit is unreachable
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Follows the cameFrom links back from the exit and returns the cells in
   // order from start to exit.
   private static List<Position> reconstruct(Position[][] cameFrom, Position exit) {
-    Stack<Position> stack = new ArrayStack<>();
-    for (Position at = exit; at != null; at = cameFrom[at.row][at.col]) {
-      stack.push(at);
-    }
-
-    List<Position> path = new ArrayList<>();
-    while (!stack.isEmpty()) {
-      path.add(stack.top());
-      stack.pop();
-    }
-    return path;
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 }
