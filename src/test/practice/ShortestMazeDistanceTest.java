@@ -61,13 +61,33 @@ public class ShortestMazeDistanceTest {
   }
 
   @Test
-  public void distanceIgnoresTheLongerRouteAroundADeadEnd() {
+  public void distanceChoosesShorterOfUnequalRoutes() {
     char[][] maze = {
-      {'S', '.', '.', '.'},
-      {'.', '#', '#', '.'},
-      {'#', '#', '#', 'E'},
+      {'S', '.', '.', '.', '.'},
+      {'.', '#', '#', '#', '.'},
+      {'.', '#', '.', '.', '.'},
+      {'.', '#', '.', '#', '#'},
+      {'.', '.', '.', '.', 'E'},
     };
-    assertEquals(5, ShortestMazeDistance.shortestDistance(maze));
+    // The route starting right takes 12 moves; the route starting down takes 8.
+    assertEquals(8, ShortestMazeDistance.shortestDistance(maze));
+  }
+
+  @Test
+  public void pathChoosesShorterOfUnequalRoutes() {
+    char[][] maze = {
+      {'S', '.', '.', '.', '.'},
+      {'.', '#', '#', '#', '.'},
+      {'.', '#', '.', '.', '.'},
+      {'.', '#', '.', '#', '#'},
+      {'.', '.', '.', '.', 'E'},
+    };
+    List<ShortestMazeDistance.Position> path =
+        ShortestMazeDistance.shortestPath(maze);
+    assertRoute(new int[][] {
+      {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
+      {4, 1}, {4, 2}, {4, 3}, {4, 4}
+    }, path);
   }
 
   @Test
