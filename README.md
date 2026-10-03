@@ -1,0 +1,50 @@
+# Maze Solving — Practice
+
+Three practice problems in two classes. `ReachableCells` counts the open cells reachable from the top-left cell. `ShortestMazeDistance` returns the fewest moves from the top-left cell to the bottom-right cell, and the shortest route itself.
+
+## Prerequisites
+
+- JDK 17+
+- The JUnit jar is already vendored in `lib/`; there is nothing to download.
+
+## Repository layout
+
+```plaintext
+code/
+  README.md
+  .gitignore
+  lib/
+    junit-platform-console-standalone-6.1.0.jar
+  src/
+    main/
+      stack/
+        Stack.java                      # the Stack ADT contract (copied from the Stack chapter)
+        ArrayStack.java                 # array-backed Stack (copied from the Stack chapter)
+      queue/
+        Queue.java                      # the Queue ADT contract (copied from the Queue chapter)
+        LinkedQueue.java                # linked Queue (copied from the Queue chapter)
+      practice/
+        ReachableCells.java             # count the cells reachable from the start
+        ShortestMazeDistance.java       # fewest moves and the route to the exit
+    test/
+      practice/
+        ReachableCellsTest.java         # tests for ReachableCells
+        ShortestMazeDistanceTest.java   # tests for ShortestMazeDistance
+  scripts/
+    test.sh                             # compile and run every JUnit test
+```
+
+## How to compile and run
+
+- `scripts/test.sh` — compiles everything and runs the full JUnit suite.
+- `scripts/test.sh practice.ReachableCellsTest` — compiles everything and runs only that test class. Use this while you are working on one problem and the other is still empty.
+
+There is no demo program for these problems; the tests are how you check your work.
+
+## What's here
+
+- `stack.Stack<T>`, `stack.ArrayStack<T>`, `queue.Queue<T>`, and `queue.LinkedQueue<T>` — unchanged copies from the Stack and Queue chapters. The practice solutions use them, so they are included here to keep this code self-contained.
+- `practice.ReachableCells` — `reachableCount`, a search with an explicit stack and a visited array.
+- `practice.ReachableCellsTest` — tests for `ReachableCells`.
+- `practice.ShortestMazeDistance` — `shortestDistance`, a queue search with a distance array, and `shortestPath`, which records where each cell was first reached and rebuilds the route with a stack. Its `Position` class is public because `shortestPath` returns a list of them.
+- `practice.ShortestMazeDistanceTest` — tests for `ShortestMazeDistance`.

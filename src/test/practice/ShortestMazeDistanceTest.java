@@ -1,0 +1,166 @@
+package practice;
+
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/**
+ * Tests for the shortest maze distance and shortest maze path problems. In
+ * every maze, 'S' marks the start and 'E' marks the exit, both as ordinary
+ * open cells; '.' marks the other open cells and '#' marks walls.
+ */
+public class ShortestMazeDistanceTest {
+
+  @Test
+  public void distanceIsZeroWhenStartIsAlsoTheExit() {
+    char[][] maze = {
+      {'S'},
+    };
+    assertEquals(0, ShortestMazeDistance.shortestDistance(maze));
+  }
+
+  @Test
+  public void distanceIsMinusOneWhenStartIsWall() {
+    char[][] maze = {
+      {'#', '.', '.'},
+      {'.', '.', '.'},
+      {'.', '.', 'E'},
+    };
+    assertEquals(-1, ShortestMazeDistance.shortestDistance(maze));
+  }
+
+  @Test
+  public void distanceIsMinusOneWhenExitIsWalledOff() {
+    char[][] maze = {
+      {'S', '.', '#'},
+      {'#', '.', '#'},
+      {'.', '#', 'E'},
+    };
+    assertEquals(-1, ShortestMazeDistance.shortestDistance(maze));
+  }
+
+  @Test
+  public void distanceFollowsTheOnlyRoute() {
+    char[][] maze = {
+      {'S', '.', '.'},
+      {'#', '#', '.'},
+      {'.', '.', 'E'},
+    };
+    assertEquals(4, ShortestMazeDistance.shortestDistance(maze));
+  }
+
+  @Test
+  public void distanceIsTheFewestMovesAroundCenterWall() {
+    char[][] maze = {
+      {'S', '.', '.'},
+      {'.', '#', '.'},
+      {'.', '.', 'E'},
+    };
+    assertEquals(4, ShortestMazeDistance.shortestDistance(maze));
+  }
+
+  @Test
+  public void distanceIgnoresTheLongerRouteAroundADeadEnd() {
+    char[][] maze = {
+      {'S', '.', '.', '.'},
+      {'.', '#', '#', '.'},
+      {'#', '#', '#', 'E'},
+    };
+    assertEquals(5, ShortestMazeDistance.shortestDistance(maze));
+  }
+
+  @Test
+  public void pathIsJustTheStartWhenStartIsAlsoTheExit() {
+    char[][] maze = {
+      {'S'},
+    };
+    List<ShortestMazeDistance.Position> path =
+        ShortestMazeDistance.shortestPath(maze);
+    assertRoute(new int[][] {{0, 0}}, path);
+  }
+
+  @Test
+  public void pathIsEmptyWhenStartIsWall() {
+    char[][] maze = {
+      {'#', '.', '.'},
+      {'.', '.', '.'},
+      {'.', '.', 'E'},
+    };
+    List<ShortestMazeDistance.Position> path =
+        ShortestMazeDistance.shortestPath(maze);
+    assertTrue(path.isEmpty());
+  }
+
+  @Test
+  public void pathIsEmptyWhenExitIsWalledOff() {
+    char[][] maze = {
+      {'S', '.', '#'},
+      {'#', '.', '#'},
+      {'.', '#', 'E'},
+    };
+    List<ShortestMazeDistance.Position> path =
+        ShortestMazeDistance.shortestPath(maze);
+    assertTrue(path.isEmpty());
+  }
+
+  @Test
+  public void pathFollowsTheOnlyRoute() {
+    char[][] maze = {
+      {'S', '.', '.'},
+      {'#', '#', '.'},
+      {'.', '.', 'E'},
+    };
+    List<ShortestMazeDistance.Position> path =
+        ShortestMazeDistance.shortestPath(maze);
+    assertRoute(new int[][] {{0, 0}, {0, 1}, {0, 2}, {1, 2}, {2, 2}}, path);
+  }
+
+  @Test
+  public void pathHasFewestMovesWhenThereAreSeveralRoutes() {
+    char[][] maze = {
+      {'S', '.', '.'},
+      {'.', '.', '.'},
+      {'.', '.', 'E'},
+    };
+    List<ShortestMazeDistance.Position> path =
+        ShortestMazeDistance.shortestPath(maze);
+    assertEquals(5, path.size());
+  }
+
+  @Test
+  public void pathMovesOneCellAtATimeWhenThereAreSeveralRoutes() {
+    char[][] maze = {
+      {'S', '.', '.'},
+      {'.', '.', '.'},
+      {'.', '.', 'E'},
+    };
+    List<ShortestMazeDistance.Position> path =
+        ShortestMazeDistance.shortestPath(maze);
+    assertTrue(movesOneCellAtATime(path));
+  }
+
+  // Asserts that path visits exactly the given (row, col) cells, in order.
+  private static void assertRoute(int[][] cells,
+      List<ShortestMazeDistance.Position> path) {
+    assertEquals(cells.length, path.size());
+    for (int i = 0; i < cells.length; i++) {
+      assertEquals(cells[i][0], path.get(i).row);
+      assertEquals(cells[i][1], path.get(i).col);
+    }
+  }
+
+  // Is every cell of path one step up, right, down, or left from the one
+  // before it?
+  private static boolean movesOneCellAtATime(
+      List<ShortestMazeDistance.Position> path) {
+    for (int i = 1; i < path.size(); i++) {
+      int rowStep = Math.abs(path.get(i).row - path.get(i - 1).row);
+      int colStep = Math.abs(path.get(i).col - path.get(i - 1).col);
+      if (rowStep + colStep != 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
