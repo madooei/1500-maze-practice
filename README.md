@@ -1,6 +1,6 @@
 # Maze Solving — Practice
 
-Three practice problems in two classes. `ReachableCells` counts the open cells reachable from the top-left cell. `ShortestMazeDistance` returns the fewest moves from the top-left cell to the bottom-right cell, and the shortest route itself.
+Three practice problems in two classes. `ReachableCells` counts the open cells reachable from the top-left cell. `MazeDistance` returns the number of moves the queue search takes from the top-left cell to the bottom-right cell, and the route itself.
 
 ## Prerequisites
 
@@ -25,11 +25,11 @@ code/
         LinkedQueue.java                # linked Queue (copied from the Queue chapter)
       practice/
         ReachableCells.java             # count the cells reachable from the start
-        ShortestMazeDistance.java       # fewest moves and the route to the exit
+        MazeDistance.java       # moves to the exit and the route itself
     test/
       practice/
         ReachableCellsTest.java         # tests for ReachableCells
-        ShortestMazeDistanceTest.java   # tests for ShortestMazeDistance
+        MazeDistanceTest.java   # tests for MazeDistance
   scripts/
     test.sh                             # compile and run every JUnit test
 ```
@@ -46,5 +46,5 @@ There is no demo program for these problems; the tests are how you check your wo
 - `stack.Stack<T>`, `stack.ArrayStack<T>`, `queue.Queue<T>`, and `queue.LinkedQueue<T>` — unchanged copies from the Stack and Queue chapters. The practice solutions use them, so they are included here to keep this code self-contained.
 - `practice.ReachableCells` — `reachableCount`, a search with an explicit stack and a visited array.
 - `practice.ReachableCellsTest` — tests for `ReachableCells`.
-- `practice.ShortestMazeDistance` — `shortestDistance`, a queue search with a distance array, and `shortestPath`, which records where each cell was first reached and rebuilds the route with a stack. Its `Position` class is public because `shortestPath` returns a list of them.
-- `practice.ShortestMazeDistanceTest` — tests for `ShortestMazeDistance`.
+- `practice.MazeDistance` — `distanceToExit`, a queue search with a distance array, and `pathToExit`, which records where each cell was first reached and rebuilds the route with a stack. Its `Position` class is public because `pathToExit` returns a list of them.
+- `practice.MazeDistanceTest` — tests for `MazeDistance`.

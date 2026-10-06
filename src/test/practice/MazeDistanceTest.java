@@ -6,18 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests for the shortest maze distance and shortest maze path problems. In
+ * Tests for the maze distance and maze path problems. In
  * every maze, 'S' marks the start and 'E' marks the exit, both as ordinary
  * open cells; '.' marks the other open cells and '#' marks walls.
  */
-public class ShortestMazeDistanceTest {
+public class MazeDistanceTest {
 
   @Test
   public void distanceIsZeroWhenStartIsAlsoTheExit() {
     char[][] maze = {
       {'S'},
     };
-    assertEquals(0, ShortestMazeDistance.shortestDistance(maze));
+    assertEquals(0, MazeDistance.distanceToExit(maze));
   }
 
   @Test
@@ -27,7 +27,7 @@ public class ShortestMazeDistanceTest {
       {'.', '.', '.'},
       {'.', '.', 'E'},
     };
-    assertEquals(-1, ShortestMazeDistance.shortestDistance(maze));
+    assertEquals(-1, MazeDistance.distanceToExit(maze));
   }
 
   @Test
@@ -37,7 +37,7 @@ public class ShortestMazeDistanceTest {
       {'#', '.', '#'},
       {'.', '#', 'E'},
     };
-    assertEquals(-1, ShortestMazeDistance.shortestDistance(maze));
+    assertEquals(-1, MazeDistance.distanceToExit(maze));
   }
 
   @Test
@@ -47,7 +47,7 @@ public class ShortestMazeDistanceTest {
       {'#', '#', '.'},
       {'.', '.', 'E'},
     };
-    assertEquals(4, ShortestMazeDistance.shortestDistance(maze));
+    assertEquals(4, MazeDistance.distanceToExit(maze));
   }
 
   @Test
@@ -57,7 +57,7 @@ public class ShortestMazeDistanceTest {
       {'.', '#', '.'},
       {'.', '.', 'E'},
     };
-    assertEquals(4, ShortestMazeDistance.shortestDistance(maze));
+    assertEquals(4, MazeDistance.distanceToExit(maze));
   }
 
   @Test
@@ -70,7 +70,7 @@ public class ShortestMazeDistanceTest {
       {'.', '.', '.', '.', 'E'},
     };
     // The route starting right takes 12 moves; the route starting down takes 8.
-    assertEquals(8, ShortestMazeDistance.shortestDistance(maze));
+    assertEquals(8, MazeDistance.distanceToExit(maze));
   }
 
   @Test
@@ -82,8 +82,8 @@ public class ShortestMazeDistanceTest {
       {'.', '#', '.', '#', '#'},
       {'.', '.', '.', '.', 'E'},
     };
-    List<ShortestMazeDistance.Position> path =
-        ShortestMazeDistance.shortestPath(maze);
+    List<MazeDistance.Position> path =
+        MazeDistance.pathToExit(maze);
     assertRoute(new int[][] {
       {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0},
       {4, 1}, {4, 2}, {4, 3}, {4, 4}
@@ -95,8 +95,8 @@ public class ShortestMazeDistanceTest {
     char[][] maze = {
       {'S'},
     };
-    List<ShortestMazeDistance.Position> path =
-        ShortestMazeDistance.shortestPath(maze);
+    List<MazeDistance.Position> path =
+        MazeDistance.pathToExit(maze);
     assertRoute(new int[][] {{0, 0}}, path);
   }
 
@@ -107,8 +107,8 @@ public class ShortestMazeDistanceTest {
       {'.', '.', '.'},
       {'.', '.', 'E'},
     };
-    List<ShortestMazeDistance.Position> path =
-        ShortestMazeDistance.shortestPath(maze);
+    List<MazeDistance.Position> path =
+        MazeDistance.pathToExit(maze);
     assertTrue(path.isEmpty());
   }
 
@@ -119,8 +119,8 @@ public class ShortestMazeDistanceTest {
       {'#', '.', '#'},
       {'.', '#', 'E'},
     };
-    List<ShortestMazeDistance.Position> path =
-        ShortestMazeDistance.shortestPath(maze);
+    List<MazeDistance.Position> path =
+        MazeDistance.pathToExit(maze);
     assertTrue(path.isEmpty());
   }
 
@@ -131,8 +131,8 @@ public class ShortestMazeDistanceTest {
       {'#', '#', '.'},
       {'.', '.', 'E'},
     };
-    List<ShortestMazeDistance.Position> path =
-        ShortestMazeDistance.shortestPath(maze);
+    List<MazeDistance.Position> path =
+        MazeDistance.pathToExit(maze);
     assertRoute(new int[][] {{0, 0}, {0, 1}, {0, 2}, {1, 2}, {2, 2}}, path);
   }
 
@@ -143,8 +143,8 @@ public class ShortestMazeDistanceTest {
       {'.', '.', '.'},
       {'.', '.', 'E'},
     };
-    List<ShortestMazeDistance.Position> path =
-        ShortestMazeDistance.shortestPath(maze);
+    List<MazeDistance.Position> path =
+        MazeDistance.pathToExit(maze);
     assertEquals(5, path.size());
   }
 
@@ -155,14 +155,14 @@ public class ShortestMazeDistanceTest {
       {'.', '.', '.'},
       {'.', '.', 'E'},
     };
-    List<ShortestMazeDistance.Position> path =
-        ShortestMazeDistance.shortestPath(maze);
+    List<MazeDistance.Position> path =
+        MazeDistance.pathToExit(maze);
     assertTrue(movesOneCellAtATime(path));
   }
 
   // Asserts that path visits exactly the given (row, col) cells, in order.
   private static void assertRoute(int[][] cells,
-      List<ShortestMazeDistance.Position> path) {
+      List<MazeDistance.Position> path) {
     assertEquals(cells.length, path.size());
     for (int i = 0; i < cells.length; i++) {
       assertEquals(cells[i][0], path.get(i).row);
@@ -173,7 +173,7 @@ public class ShortestMazeDistanceTest {
   // Is every cell of path one step up, right, down, or left from the one
   // before it?
   private static boolean movesOneCellAtATime(
-      List<ShortestMazeDistance.Position> path) {
+      List<MazeDistance.Position> path) {
     for (int i = 1; i < path.size(); i++) {
       int rowStep = Math.abs(path.get(i).row - path.get(i - 1).row);
       int colStep = Math.abs(path.get(i).col - path.get(i - 1).col);

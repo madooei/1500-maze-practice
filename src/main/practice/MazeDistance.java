@@ -7,16 +7,16 @@ import stack.ArrayStack;
 import queue.Queue;
 import queue.LinkedQueue;
 
-/** Solutions to the shortest maze distance and shortest maze path problems. */
-public final class ShortestMazeDistance {
+/** Solutions to the maze distance and maze path problems. */
+public final class MazeDistance {
 
-  private ShortestMazeDistance() {
+  private MazeDistance() {
     // This class should not be instantiated!
   }
 
   /**
    * A cell in the maze: a row and a column. It is public because
-   * shortestPath returns a list of them.
+   * pathToExit returns a list of them.
    */
   public static class Position {
     public int row;
@@ -39,19 +39,19 @@ public final class ShortestMazeDistance {
         && maze[row][col] != '#';
   }
 
-  // Returns the fewest moves from the top-left cell to the bottom-right cell,
-  // or -1 if the exit cannot be reached. Assumes maze is not null,
-  // rectangular, and has at least one cell.
-  public static int shortestDistance(char[][] maze) {
+  // Returns the number of moves the queue search takes from the top-left cell
+  // to the bottom-right cell, or -1 if the exit cannot be reached. Assumes
+  // maze is not null, rectangular, and has at least one cell.
+  public static int distanceToExit(char[][] maze) {
     // TODO: Implement me
     throw new UnsupportedOperationException("TODO: Implement me");
   }
 
-  // Returns the cells of a shortest route from the top-left cell to the
-  // bottom-right cell, in order from start to exit, or an empty list if the
-  // exit cannot be reached. Assumes maze is not null, rectangular, and has at
-  // least one cell.
-  public static List<Position> shortestPath(char[][] maze) {
+  // Returns the cells of the route the queue search takes from the top-left
+  // cell to the bottom-right cell, in order from start to exit, or an empty
+  // list if the exit cannot be reached. Assumes maze is not null,
+  // rectangular, and has at least one cell.
+  public static List<Position> pathToExit(char[][] maze) {
     // TODO: Implement me
     throw new UnsupportedOperationException("TODO: Implement me");
   }
