@@ -27,6 +27,10 @@ code/
         ReachableCells.java             # count the cells reachable from the start
         MazeDistance.java               # moves to the exit
         MazePath.java                   # the route to the exit
+      demo/                             # one demo per solution class
+        ReachableCellsDemo.java
+        MazeDistanceDemo.java
+        MazePathDemo.java
     test/
       practice/
         ReachableCellsTest.java         # tests for ReachableCells
@@ -34,14 +38,14 @@ code/
         MazePathTest.java               # tests for MazePath
   scripts/
     test.sh                             # compile and run every JUnit test
+    run.sh                              # compile and run one demo
 ```
 
 ## How to compile and run
 
 - `scripts/test.sh` — compiles everything and runs the full JUnit suite.
 - `scripts/test.sh practice.ReachableCellsTest` — compiles everything and runs only that test class. Use this while you are working on one problem and the others are still empty.
-
-There is no demo program for these problems; the tests are how you check your work.
+- `scripts/run.sh demo.ReachableCellsDemo` — compiles everything and runs that one demo. Every problem class has its own demo, `<Class>Demo`.
 
 ## What's here
 
@@ -52,3 +56,4 @@ There is no demo program for these problems; the tests are how you check your wo
 - `practice.MazeDistanceTest` — tests for `MazeDistance`.
 - `practice.MazePath` — `pathToExit`, a queue search that records where each cell was first reached and rebuilds the route with a stack. Its `Position` class is public because `pathToExit` returns a list of them.
 - `practice.MazePathTest` — tests for `MazePath`.
+- `demo.ReachableCellsDemo`, `demo.MazeDistanceDemo`, and `demo.MazePathDemo` — one demo per solution class, each on an example from the notes.
