@@ -47,7 +47,7 @@ code/
 - `scripts/test.sh practice.ReachableCellsTest` — compiles everything and runs only that test class. Use this while you are working on one problem and the others are still empty.
 - `scripts/run.sh demo.ReachableCellsDemo` — compiles everything and runs that one demo. Every problem class has its own demo, `<Class>Demo`.
 
-## What's here
+## Contents
 
 - `stack.Stack<T>`, `stack.ArrayStack<T>`, `queue.Queue<T>`, and `queue.LinkedQueue<T>` — unchanged copies from the Stack and Queue chapters. The practice solutions use them, so they are included here to keep this code self-contained.
 - `practice.ReachableCells` — `reachableCount`, a search with an explicit stack and a visited array.
